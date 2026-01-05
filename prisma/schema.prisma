@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model DailyChannelStats {
+  id                   Int      @id @default(autoincrement())
+  date                 DateTime @unique
+
+  subscribers           Int
+  totalViews            BigInt
+  videoCount            Int
+
+  dailyViews            Int
+  dailyWatchTimeMinutes Int
+  avgViewDurationSec    Int
+
+  createdAt             DateTime @default(now())
+}
+model AppConfig {
+  id           Int    @id @default(autoincrement())
+  key          String @unique
+  value        String
+  createdAt    DateTime @default(now())
+}
